@@ -41,7 +41,6 @@ export default function Page() {
         } catch (err) {
             // See https://clerk.com/docs/custom-flows/error-handling
             // for more info on error handling
-
             if (err.errors?.[0].code === "form_password_incorrect") {
                 setError("Incorrect email or password. Please try again.")
             } else {
