@@ -60,6 +60,56 @@ app.post('/api/transactions', async (req, res) => {
     }
 })
 
+app.get('/api/transactions/:userId', async (req, res) => {
+    try {
+
+        const { userId } = req.params;
+        if (!userId) {
+            return res.status(400).json({ error: 'User ID is required' });
+        }
+
+        // Retrieve transactions for the specified user
+        const transactions = await sql`
+            SELECT * FROM transactions
+            WHERE user_id = ${userId}
+            ORDER BY created_at DESC
+        `;
+        // const transactions = await sql`SELECT * FROM transactions ORDER BY created_at DESC LIMIT 100`;
+        console.log('Transactions retrieved:', transactions);
+        return res.status(200).json(transactions);
+    } catch (error) {
+        console.error('Error retrieving transactions:', error);
+        return res.status(500).json({ message: 'Internal server error', error });
+    }
+});
+
+app.delete('/api/transactions/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!id) {
+            return res.status(400).json({ error: 'Transaction ID is required' });
+        }
+
+        // Delete the transaction with the specified ID
+        const result = await sql`
+            DELETE FROM transactions
+            WHERE id = ${id}
+            RETURNING *
+        `;
+
+        if (result.length === 0) {
+            return res.status(404).json({ message: 'Transaction not found' });
+        }
+
+        console.log('Transaction deleted:', result[0]);
+        return res.status(200).json({ message: 'Transaction deleted successfully', transaction: result[0] });
+
+    } catch (error) {
+        console.error('Error deleting transaction:', error);
+        return res.status(500).json({ message: 'Internal server error', error });
+    }
+});
+
 // console.log(`Port: ${process.env.PORT}`);
 
 connectToDatabase().then(() => {
