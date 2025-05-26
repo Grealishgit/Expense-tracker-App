@@ -5,6 +5,10 @@ import { sql } from './config/db.js';
 dotenv.config();
 
 const app = express();
+
+// Middleware to parse JSON bodies
+app.use(express.json()); 
+
 const PORT = process.env.PORT || 5000;
 
 async function connectToDatabase() {
@@ -19,7 +23,7 @@ async function connectToDatabase() {
             created_at DATE NOT NULL DEFAULT CURRENT_DATE
         )`;
 
-        console.log('Database connected and table created successfully');
+        console.log('Database connected  successfully');
 
     } catch (error) {
         console.error('Error connecting to the database:', error);
@@ -28,10 +32,19 @@ async function connectToDatabase() {
 }
 
 
-app.use(express.json());
+
 app.get('/', (req, res) => {
     res.send('Get request received');
 });
+
+app.post('/api/transactions', async (req, res) => {
+    try {
+        const { user_id, title, amount, category } = req.body;
+        log('Received data:', req.body);
+    } catch (error) {
+
+    }
+})
 
 // console.log(`Port: ${process.env.PORT}`);
 
