@@ -1,7 +1,7 @@
 import { useSignIn } from '@clerk/clerk-expo'
-import { Link, useRouter } from 'expo-router'
+import { useRouter } from 'expo-router'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
-import revenue from '../../assets/images/revenue-i3.png'
+import revenue from '../../assets/images/revenue-i4.png'
 import { styles } from '@/assets/styles/auth.styles.js'
 import { Ionicons } from '@expo/vector-icons'
 import { COLORS } from '../../constants/colors.js'
@@ -15,7 +15,7 @@ export default function Page() {
 
     const [emailAddress, setEmailAddress] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState(null)
+    const [error, setError] = useState("")
 
     // Handle the submission of the sign-in form
     const onSignInPress = async () => {
@@ -41,7 +41,13 @@ export default function Page() {
         } catch (err) {
             // See https://clerk.com/docs/custom-flows/error-handling
             // for more info on error handling
-            console.error(JSON.stringify(err, null, 2))
+
+            if (err.errors?.[0].code === "form_password_incorrect") {
+                setError("Incorrect email or password. Please try again.")
+            } else {
+                setError("An error occurred during sign-in. Please try again later.")
+            }
+            // console.error(JSON.stringify(err, null, 2))
         }
     }
 
@@ -57,7 +63,7 @@ export default function Page() {
             <View styles={styles.container} >
                 <Image source={revenue} style={styles.illustration} />
                 <View style={{ borderWidth: 1, borderColor: COLORS.primary, borderRadius: 8, padding: 12 }}>
-                    <Text style={styles.title} >Login</Text>
+                    <Text style={styles.title} >Welcome Back</Text>
                     {error ? (
                         <View style={styles.errorBox}>
                             <Ionicons name="alert-circle" size={20} color={COLORS.expense} />

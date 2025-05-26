@@ -40,7 +40,15 @@ export default function SignUpScreen() {
         } catch (err) {
             // See https://clerk.com/docs/custom-flows/error-handling
             // for more info on error handling
-            console.error(JSON.stringify(err, null, 2))
+
+            if (err.errors?.[0].code === "form_identifier_exists") {
+                setError("This email address is already in use. Please try signing in instead.")
+            } else if (err.errors?.[0].code === "form_password_length_too_short") {
+                setError("Password must be at least 8 characters long.")
+            } else {
+                setError("An error occurred during sign-up. Please try again later.")
+            }
+            // console.error(JSON.stringify(err, null, 2))
         }
     }
 
