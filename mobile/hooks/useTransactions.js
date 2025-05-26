@@ -6,7 +6,7 @@ import { Alert } from "react-native";
 export const useTranactions = (userId) => {
     const [transactions, setTransactions] = useState([]);
 
-    const API_URL = 'http://localhost:4000/api'; // Replace with your API URL
+    const API_URL = 'https://expense-tracker-app-1owp.onrender.com/api'; // Replace with your API URL
 
     const [summary, setSummary] = useState({
         balance: 0,
