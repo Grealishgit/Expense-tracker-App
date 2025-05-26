@@ -1,10 +1,33 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { sql } from './config/db.js';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+async function connectToDatabase() {
+
+    try {
+        await sql`CREATE TABLE IF NOT EXISTS transactions (
+            id SERIAL PRIMARY KEY,
+            user_id VARCHAR(255) NOT NULL,
+            title VARCHAR(255) NOT NULL,
+            amount DECIMAL(10,2) NOT NULL,
+            category VARCHAR(255) NOT NULL,
+            created_at DATE NOT NULL DEFAULT CURRENT_DATE
+        )`;
+
+        console.log('Database connected and table created successfully');
+
+    } catch (error) {
+        console.error('Error connecting to the database:', error);
+        process.exit(1); // Exit the process with failure
+    }
+}
+
+
 app.use(express.json());
 app.get('/', (req, res) => {
     res.send('Get request received');
@@ -12,7 +35,8 @@ app.get('/', (req, res) => {
 
 // console.log(`Port: ${process.env.PORT}`);
 
-
-app.listen(PORT, () => {
+connectToDatabase().then(() => {
+    app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
-});
+    });
+})
