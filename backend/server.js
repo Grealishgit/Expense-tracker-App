@@ -114,7 +114,58 @@ app.delete('/api/transactions/:id', async (req, res) => {
     }
 });
 
-// console.log(`Port: ${process.env.PORT}`);
+// app.get('/api/transactions', async (req, res) => {
+//     try {
+//         // Retrieve all transactions
+//         const transactions = await sql`
+//             SELECT * FROM transactions
+//             ORDER BY created_at DESC
+//         `;
+//         console.log('All transactions retrieved:', transactions);
+//         return res.status(200).json(transactions);
+//     } catch (error) {
+//         console.error('Error retrieving all transactions:', error);
+//         return res.status(500).json({ message: 'Internal server error', error });
+//     }
+// });
+
+app.get('/api/transactions/summary/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        if (!userId) {
+            return res.status(400).json({ error: 'User ID is required' });
+        }
+
+        // Retrieve the summary of transactions for the specified user
+        const balanceResult = await sql`
+            SELECT COALESCE(SUM(amount), 0) AS balance
+            FROM transactions
+            WHERE user_id = ${userId}
+        `;
+
+        const incomeResult = await sql`
+            SELECT COALESCE(SUM(amount), 0) AS income
+            FROM transactions
+            WHERE user_id = ${userId} AND amount > 0
+        `;
+        const expensesResult = await sql`
+        SELECT COALESCE(SUM(amount), 0) AS expenses
+        FROM transactions
+        WHERE user_id = ${userId} AND amount < 0
+    `;
+
+        res.status(200).json({
+            balance: balanceResult[0].balance,
+            income: incomeResult[0].income,
+            expenses: expensesResult[0].expenses
+        });
+
+
+    } catch (error) {
+        console.error('Error retrieving transaction summary:', error);
+        return res.status(500).json({ message: 'Internal server error', error });
+    }
+})
 
 connectToDatabase().then(() => {
     app.listen(PORT, () => {
