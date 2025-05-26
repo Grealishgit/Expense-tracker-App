@@ -13,7 +13,7 @@ const coffeeTheme = {
 };
 
 const forestTheme = {
-    primary: "#2E7D32",
+    primary: "#009b40",
     background: "#E8F5E9",
     text: "#1B5E20",
     border: "#C8E6C9",

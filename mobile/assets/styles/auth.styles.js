@@ -6,28 +6,28 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLORS.background,
-        padding: 20,
+        padding: 15,
         justifyContent: "center",
     },
     illustration: {
-        width: "100%",
+        width: 300,
         height: 310,
         resizeMode: "contain",
     },
     title: {
         fontSize: 32,
         fontWeight: "bold",
-        color: COLORS.text,
+        color: COLORS.primary,
         marginVertical: 15,
         textAlign: "center",
     },
     input: {
         backgroundColor: COLORS.white,
-        borderRadius: 12,
+        borderRadius: 8,
         padding: 15,
         marginBottom: 16,
         borderWidth: 1,
-        borderColor: COLORS.border,
+        borderColor: COLORS.primary,
         fontSize: 16,
         color: COLORS.text,
     },
@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
     },
     buttonText: {
         color: COLORS.white,
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: "600",
     },
     footerContainer: {
@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
     },
     verificationTitle: {
-        fontSize: 24,
+        fontSize: 26,
         fontWeight: "bold",
         color: COLORS.text,
         marginBottom: 20,
