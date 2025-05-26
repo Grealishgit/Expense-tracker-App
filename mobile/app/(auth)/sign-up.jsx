@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { COLORS } from '../../constants/colors.js'
 import { Image } from 'expo-image'
 import revenue from '../../assets/images/revenue-i2.png'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default function SignUpScreen() {
     const { isLoaded, signUp, setActive } = useSignUp()
@@ -100,9 +101,18 @@ export default function SignUpScreen() {
     }
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <View styles={styles.container}>
+        <KeyboardAwareScrollView
+            style={{ flex: 1, backgroundColor: COLORS.background, padding: 15 }}
+            contentContainerStyle={{ flexGrow: 1 }}
+            keyboardShouldPersistTaps="handled"
+            extraScrollHeight={100}
+            enableOnAndroid={true}
+            enableAutomaticScroll={true}
+
+        >
+            <View styles={styles.container} >
                 <Image source={revenue} style={styles.illustration} />
+                <View style={{ borderWidth: 1, borderColor: COLORS.primary, borderRadius: 8, padding: 10 }}>
                 <Text style={styles.title} >Create An Account</Text>
 
 
@@ -140,8 +150,9 @@ export default function SignUpScreen() {
                     <TouchableOpacity onPress={() => router.back()}>
                         <Text style={styles.linkText} >Sign in</Text>
                     </TouchableOpacity>
+                    </View>
                 </View>
             </View>
-        </View>
+        </KeyboardAwareScrollView>
     )
 }

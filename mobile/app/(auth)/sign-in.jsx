@@ -1,14 +1,21 @@
 import { useSignIn } from '@clerk/clerk-expo'
 import { Link, useRouter } from 'expo-router'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import revenue from '../../assets/images/revenue-i3.png'
+import { styles } from '@/assets/styles/auth.styles.js'
+import { Ionicons } from '@expo/vector-icons'
+import { COLORS } from '../../constants/colors.js'
+import { Image } from 'expo-image'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { useState } from 'react'
 
 export default function Page() {
     const { signIn, setActive, isLoaded } = useSignIn()
     const router = useRouter()
 
-    const [emailAddress, setEmailAddress] = React.useState('')
-    const [password, setPassword] = React.useState('')
+    const [emailAddress, setEmailAddress] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState(null)
 
     // Handle the submission of the sign-in form
     const onSignInPress = async () => {
@@ -39,28 +46,56 @@ export default function Page() {
     }
 
     return (
-        <View>
-            <Text>Sign in</Text>
-            <TextInput
-                autoCapitalize="none"
-                value={emailAddress}
-                placeholder="Enter email"
-                onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
-            />
-            <TextInput
-                value={password}
-                placeholder="Enter password"
-                secureTextEntry={true}
-                onChangeText={(password) => setPassword(password)}
-            />
-            <TouchableOpacity onPress={onSignInPress}>
-                <Text>Continue</Text>
-            </TouchableOpacity>
-            <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-                <Link href="/sign-up">
-                    <Text>Sign up</Text>
-                </Link>
+        <KeyboardAwareScrollView
+            style={{ flex: 1, backgroundColor: COLORS.background, padding: 15 }}
+            contentContainerStyle={{ flexGrow: 1 }}
+            keyboardShouldPersistTaps="handled"
+            extraScrollHeight={100}
+            enableOnAndroid={true}
+            enableAutomaticScroll={true}
+        >
+            <View styles={styles.container} >
+                <Image source={revenue} style={styles.illustration} />
+                <View style={{ borderWidth: 1, borderColor: COLORS.primary, borderRadius: 8, padding: 12 }}>
+                    <Text style={styles.title} >Login</Text>
+                    {error ? (
+                        <View style={styles.errorBox}>
+                            <Ionicons name="alert-circle" size={20} color={COLORS.expense} />
+                            <Text style={styles.errorText}>{error}</Text>
+                            <TouchableOpacity onPress={() => setError("")}>
+                                <Ionicons name="close" size={20} color={COLORS.textLight} />
+                            </TouchableOpacity>
+                        </View>
+                    ) : null}
+                    <TextInput
+                        autoCapitalize="none"
+                        value={emailAddress}
+                        placeholder="Enter email"
+                        placeholderTextColor="#9a8478"
+                        onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
+                        style={[styles.input, error && styles.errorInput]}
+                    />
+                    <TextInput
+                        value={password}
+                        placeholder="Enter password"
+                        placeholderTextColor="#9a8478"
+                        secureTextEntry={true}
+                        onChangeText={(password) => setPassword(password)}
+                        style={[styles.input, error && styles.errorInput]}
+                    />
+                    <TouchableOpacity onPress={onSignInPress} style={styles.button}>
+                        <Text style={styles.buttonText} >Sign In</Text>
+                    </TouchableOpacity>
+                    <View style={styles.footerContainer}>
+                        <Text style={styles.footerText} >Don't have an account?</Text>
+                        <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
+                            <TouchableOpacity onPress={() => router.push('/sign-up')}>
+                                <Text style={styles.linkText} >Sign Up</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
             </View>
-        </View>
+        </KeyboardAwareScrollView>
     )
 }
