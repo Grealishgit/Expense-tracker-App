@@ -89,6 +89,10 @@ app.delete('/api/transactions/:id', async (req, res) => {
         if (!id) {
             return res.status(400).json({ error: 'Transaction ID is required' });
         }
+        // Validate that the ID is a number
+        if (isNaN(parseInt(id))) {
+            return res.status(400).json({ error: 'Invalid transaction ID' });
+        }
 
         // Delete the transaction with the specified ID
         const result = await sql`
