@@ -25,15 +25,21 @@ export const styles = StyleSheet.create({
     },
     saveButtonContainer: {
         flexDirection: "row",
+        width: 80,
+        backgroundColor: COLORS.primary,
+        borderRadius: 8,
         alignItems: "center",
+        justifyContent: "center",
+        padding: 5,
         gap: 4,
     },
     saveButtonDisabled: {
         opacity: 0.5,
+        width: 90,
     },
     saveButton: {
         fontSize: 16,
-        color: COLORS.primary,
+        color: COLORS.white,
         fontWeight: "600",
     },
     card: {

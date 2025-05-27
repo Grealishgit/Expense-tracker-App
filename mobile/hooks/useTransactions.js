@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useCallback } from "react";
 import { Alert } from "react-native";
+import { API_URL } from "../constants/api"; // Adjust the import path as necessary
 
 //react custom hook file for fetching transactions
 export const useTransactions = (userId) => {
     const [transactions, setTransactions] = useState([]);
 
-    const API_URL = 'https://expense-tracker-app-1owp.onrender.com/api'; // Replace with your API URL
+    // const API_URL = 'https://expense-tracker-app-1owp.onrender.com/api'; // Replace with your API URL
 
     const [summary, setSummary] = useState({
         balance: 0,

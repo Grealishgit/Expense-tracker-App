@@ -40,7 +40,7 @@ export default function Page() {
         }
     }
 
-    if (isLoading && !refreshing) return <PageLoader />
+    // if (isLoading && !refreshing) return <PageLoader />
     const handleDelete = (id) => {
         Alert.alert(
             "Delete Transaction",
