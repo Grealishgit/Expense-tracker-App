@@ -11,6 +11,7 @@ import logo from '../../assets/images/logo.png';
 import { Ionicons } from '@expo/vector-icons';
 import BalanceCard from '../../components/BalanceCard';
 import TransactionItem from '../../components/TransactionItem';
+import EmptyTransactions from '../../components/EmptyTransactions';
 
 export default function Page() {
     const { user } = useUser();
@@ -69,11 +70,12 @@ export default function Page() {
             <FlatList
                 style={styles.transactionsList}
                 showsVerticalScrollIndicator={false}
-                data={transactions}
+                data={!transactions}
                 contentContainerStyle={styles.transactionsListContent}
                 renderItem={({ item }) => (
-                    <TransactionItem item={item} onDelete={handleDelete} />
-                )}
+                    <TransactionItem item={item} onDelete={handleDelete} />)}
+                ListEmptyComponent={EmptyTransactions}
+
             />
         </View>
     )

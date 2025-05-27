@@ -232,10 +232,11 @@ export const styles = StyleSheet.create({
     emptyStateButton: {
         backgroundColor: COLORS.primary,
         flexDirection: "row",
+        justifyContent: "center",
         alignItems: "center",
         paddingVertical: 10,
         paddingHorizontal: 16,
-        borderRadius: 20,
+        borderRadius: 8,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
@@ -245,7 +246,7 @@ export const styles = StyleSheet.create({
     emptyStateButtonText: {
         color: COLORS.white,
         fontWeight: "600",
-        marginLeft: 6,
+        // marginLeft: 6,
     },
     transactionsHeaderContainer: {
         flexDirection: "row",
