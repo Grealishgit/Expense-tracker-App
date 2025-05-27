@@ -20,9 +20,7 @@ export default function Page() {
     const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(user?.id)
 
     useEffect(() => {
-
         loadData();
-
     }, [loadData]);
     // console.log('user', user.id);
     // console.log('data loaded', transactions);
@@ -40,7 +38,7 @@ export default function Page() {
         }
     }
 
-    // if (isLoading && !refreshing) return <PageLoader />
+    if (isLoading && !refreshing) return <PageLoader />
     const handleDelete = (id) => {
         Alert.alert(
             "Delete Transaction",
