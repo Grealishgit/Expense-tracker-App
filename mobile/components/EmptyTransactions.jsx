@@ -23,7 +23,7 @@ const EmptyTransactions = () => {
                 <Ionicons
                     name='add-circle-outline'
                     size={18}
-                    color={COLORS.primary}
+                    color={COLORS.white}
                     style={styles.addTransactionButton}
                     onPress={() => router.push('/create')}
                 />

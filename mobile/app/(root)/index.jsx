@@ -1,9 +1,9 @@
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo'
 import { Link, useRouter } from 'expo-router'
-import { Alert, FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, FlatList, Image, RefreshControl, Text, TouchableOpacity, View } from 'react-native'
 import { SignOutButton } from '@/components/SignOutButton'
 import { useTransactions } from '../../hooks/useTransactions';
-import { use } from 'react';
+import { use, useState } from 'react';
 import { useEffect } from 'react';
 import PageLoader from '../../components/PageLoader';
 import { styles } from "../../assets/styles/home.styles";
@@ -16,6 +16,7 @@ import EmptyTransactions from '../../components/EmptyTransactions';
 export default function Page() {
     const { user } = useUser();
     const router = useRouter();
+    const [refreshing, setRefreshing] = useState(false);
     const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(user?.id)
 
     useEffect(() => {
@@ -26,7 +27,20 @@ export default function Page() {
     // console.log('user', user.id);
     // console.log('data loaded', transactions);
 
-    if (isLoading) return <PageLoader />
+    const onRefresh = async () => {
+        setRefreshing(true);
+        try {
+            await loadData();
+            // Refresh the data
+        }
+        catch (error) {
+            console.error('Error refreshing data:', error);
+        } finally {
+            setRefreshing(false);
+        }
+    }
+
+    if (isLoading && !refreshing) return <PageLoader />
     const handleDelete = (id) => {
         Alert.alert(
             "Delete Transaction",
@@ -70,11 +84,12 @@ export default function Page() {
             <FlatList
                 style={styles.transactionsList}
                 showsVerticalScrollIndicator={false}
-                data={!transactions}
+                data={transactions}
                 contentContainerStyle={styles.transactionsListContent}
                 renderItem={({ item }) => (
                     <TransactionItem item={item} onDelete={handleDelete} />)}
                 ListEmptyComponent={EmptyTransactions}
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
 
             />
         </View>

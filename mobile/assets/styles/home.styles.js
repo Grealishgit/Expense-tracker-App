@@ -246,7 +246,7 @@ export const styles = StyleSheet.create({
     emptyStateButtonText: {
         color: COLORS.white,
         fontWeight: "600",
-        // marginLeft: 6,
+        marginLeft: 6,
     },
     transactionsHeaderContainer: {
         flexDirection: "row",
