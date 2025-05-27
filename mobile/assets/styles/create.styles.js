@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     card: {
         backgroundColor: COLORS.card,
         margin: 16,
-        borderRadius: 16,
+        borderRadius: 8,
         padding: 16,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
@@ -64,13 +64,17 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         paddingVertical: 12,
-        borderRadius: 25,
+        borderRadius: 8,
         borderWidth: 1,
         borderColor: COLORS.border,
     },
     typeButtonActive: {
         backgroundColor: COLORS.primary,
         borderColor: COLORS.primary,
+    },
+    typeButtonActive1: {
+        backgroundColor: 'red',
+        borderColor: 'red',
     },
     typeIcon: {
         marginRight: 8,
@@ -135,13 +139,14 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         flexWrap: "wrap",
         gap: 10,
+        width: "100%",
     },
     categoryButton: {
         flexDirection: "row",
         alignItems: "center",
         paddingHorizontal: 16,
         paddingVertical: 10,
-        borderRadius: 20,
+        borderRadius: 8,
         borderWidth: 1,
         borderColor: COLORS.border,
         backgroundColor: COLORS.white,

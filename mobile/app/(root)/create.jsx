@@ -55,12 +55,12 @@ const Create = () => {
 
 
             });
-            console.log('Creating transaction with data:', {
-                user_id: user.id,
-                title,
-                amount: formmattedAmount,
-                category: selectedCategory.name,
-            })
+            // console.log('Creating transaction with data:', {
+            //     user_id: user.id,
+            //     title,
+            //     amount: formmattedAmount,
+            //     category: selectedCategory.name,
+            // })
 
             if (!response.ok) {
                 const errorData = await response.json();
@@ -117,7 +117,7 @@ const Create = () => {
                 <View style={styles.typeSelector}>
                     {/* EXPENSE SELECTOR */}
                     <TouchableOpacity
-                        style={[styles.typeButton, isExpense && styles.typeButtonActive]}
+                        style={[styles.typeButton, isExpense && styles.typeButtonActive1]}
                         onPress={() => setIsExpense(true)}
                     >
                         <Ionicons name="arrow-down-circle" size={24} color={isExpense ? COLORS.white : COLORS.expense} style={styles.typeIcon} />
