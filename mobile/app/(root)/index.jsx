@@ -9,6 +9,7 @@ import PageLoader from '../../components/PageLoader';
 import { styles } from "../../assets/styles/home.styles";
 import logo from '../../assets/images/logo.png';
 import { Ionicons } from '@expo/vector-icons';
+import BalanceCard from '../../components/BalanceCard';
 
 export default function Page() {
     const { user } = useUser();
@@ -47,6 +48,11 @@ export default function Page() {
                         </TouchableOpacity>
                         <SignOutButton />
                     </View>
+                </View>
+                <BalanceCard summary={summary} />
+                <View style={styles.transactionsHeaderContainer}>
+                    <Text style={styles.sectionTitle}>Recent Transactions</Text>
+
                 </View>
             </View>
         </View>

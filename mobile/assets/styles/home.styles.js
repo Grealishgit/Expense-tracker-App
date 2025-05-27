@@ -81,7 +81,7 @@ export const styles = StyleSheet.create({
     },
     balanceCard: {
         backgroundColor: COLORS.card,
-        borderRadius: 20,
+        borderRadius: 8,
         padding: 20,
         marginBottom: 20,
         shadowColor: COLORS.shadow,
@@ -95,7 +95,7 @@ export const styles = StyleSheet.create({
     },
     balanceTitle: {
         fontSize: 16,
-        color: COLORS.textLight,
+        color: COLORS.primary,
         marginBottom: 8,
     },
     balanceAmount: {
