@@ -3,10 +3,16 @@ import dotenv from 'dotenv';
 import { connectToDatabase } from './config/db.js';
 import rateLimiter from './middleware/rateLimiter.js';
 import transactionsRoute from './routes/transactionsRoute.js';
+import job from './config/cron.js';
 
 dotenv.config();
 
 const app = express();
+
+
+// if (process.env.NODE_ENV === "production")
+// Start the cron job
+job.start();
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -17,6 +23,7 @@ const PORT = process.env.PORT || 5000;
 app.get('/', (req, res) => {
     res.send('Get request received');
 });
+
 
 app.use("/api/transactions", transactionsRoute);
 

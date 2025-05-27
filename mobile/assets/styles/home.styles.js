@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     },
     welcomeText: {
         fontSize: 14,
-        color: COLORS.textLight,
+        color: COLORS.primary,
         marginBottom: 2,
     },
     usernameText: {
@@ -53,9 +53,9 @@ export const styles = StyleSheet.create({
     },
     addButton: {
         backgroundColor: COLORS.primary,
-        paddingHorizontal: 16,
-        paddingVertical: 10,
-        borderRadius: 24,
+        paddingHorizontal: 18,
+        paddingVertical: 8,
+        borderRadius: 8,
         flexDirection: "row",
         alignItems: "center",
         shadowColor: "#000",
@@ -70,8 +70,8 @@ export const styles = StyleSheet.create({
         marginLeft: 4,
     },
     logoutButton: {
-        padding: 10,
-        borderRadius: 20,
+        padding: 8,
+        borderRadius: 8,
         backgroundColor: COLORS.card,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 1 },
