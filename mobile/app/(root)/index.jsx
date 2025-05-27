@@ -1,8 +1,8 @@
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo'
 import { Link, useRouter } from 'expo-router'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
 import { SignOutButton } from '@/components/SignOutButton'
-import { useTranactions } from '../../hooks/useTransactions';
+import { useTransactions } from '../../hooks/useTransactions';
 import { use } from 'react';
 import { useEffect } from 'react';
 import PageLoader from '../../components/PageLoader';
@@ -10,11 +10,12 @@ import { styles } from "../../assets/styles/home.styles";
 import logo from '../../assets/images/logo.png';
 import { Ionicons } from '@expo/vector-icons';
 import BalanceCard from '../../components/BalanceCard';
+import TransactionItem from '../../components/TransactionItem';
 
 export default function Page() {
     const { user } = useUser();
     const router = useRouter();
-    const { transactions, summary, isLoading, loadData, deleteTransaction } = useTranactions(user?.id)
+    const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(user?.id)
 
     useEffect(() => {
 
@@ -24,7 +25,17 @@ export default function Page() {
     // console.log('user', user.id);
     // console.log('data loaded', transactions);
 
-    // if (isLoading) return <PageLoader />
+    if (isLoading) return <PageLoader />
+    const handleDelete = (id) => {
+        Alert.alert(
+            "Delete Transaction",
+            "Are you sure you want to delete this transaction?",
+            [
+                { text: "Cancel", style: "cancel" },
+                { text: "Delete", style: "destructive", onPress: () => deleteTransaction(id) }
+            ]
+        );
+    }
 
     return (
         <View style={styles.container}>
@@ -55,6 +66,15 @@ export default function Page() {
 
                 </View>
             </View>
+            <FlatList
+                style={styles.transactionsList}
+                showsVerticalScrollIndicator={false}
+                data={transactions}
+                contentContainerStyle={styles.transactionsListContent}
+                renderItem={({ item }) => (
+                    <TransactionItem item={item} onDelete={handleDelete} />
+                )}
+            />
         </View>
     )
 }

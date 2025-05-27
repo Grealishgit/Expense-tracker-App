@@ -133,7 +133,7 @@ export const styles = StyleSheet.create({
     },
     transactionCard: {
         backgroundColor: COLORS.card,
-        borderRadius: 12,
+        borderRadius: 8,
         marginBottom: 10,
         flexDirection: "row",
         alignItems: "center",

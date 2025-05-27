@@ -50,13 +50,112 @@ const oceanTheme = {
     card: "#FFFFFF",
     shadow: "#000000",
 };
+const sunriseTheme = {
+    primary: "#FF6F61",
+    background: "#FFF3E0",
+    text: "#BF360C",
+    border: "#FFDAB9",
+    white: "#FFFFFF",
+    textLight: "#FFAB91",
+    expense: "#E53935",
+    income: "#43A047",
+    card: "#FFFFFF",
+    shadow: "#FFCCBC",
+};
+
+const auroraTheme = {
+    primary: "#7B1FA2",
+    background: "#F3E8FD",
+    text: "#4A0072",
+    border: "#CE93D8",
+    white: "#FFFFFF",
+    textLight: "#BA68C8",
+    expense: "#F44336",
+    income: "#4CAF50",
+    card: "#FFFFFF",
+    shadow: "#E1BEE7",
+};
+
+const tealGlowTheme = {
+    primary: "#009688",
+    background: "#E0F2F1",
+    text: "#004D40",
+    border: "#B2DFDB",
+    white: "#FFFFFF",
+    textLight: "#4DB6AC",
+    expense: "#F06292",
+    income: "#81C784",
+    card: "#FFFFFF",
+    shadow: "#80CBC4",
+};
+
+const goldenHourTheme = {
+    primary: "#F57F17",
+    background: "#FFF8E1",
+    text: "#E65100",
+    border: "#FFECB3",
+    white: "#FFFFFF",
+    textLight: "#FFD54F",
+    expense: "#FF7043",
+    income: "#66BB6A",
+    card: "#FFFFFF",
+    shadow: "#FFE082",
+};
+
+const midnightTheme = {
+    primary: "#37474F",
+    background: "#ECEFF1",
+    text: "#263238",
+    border: "#B0BEC5",
+    white: "#FFFFFF",
+    textLight: "#90A4AE",
+    expense: "#EF5350",
+    income: "#26A69A",
+    card: "#FFFFFF",
+    shadow: "#90A4AE",
+};
+
+const blushTheme = {
+    primary: "#EC407A",
+    background: "#FCE4EC",
+    text: "#880E4F",
+    border: "#F8BBD0",
+    white: "#FFFFFF",
+    textLight: "#F48FB1",
+    expense: "#E57373",
+    income: "#81C784",
+    card: "#FFFFFF",
+    shadow: "#F48FB1",
+};
+const darkTheme = {
+    primary: "#1F1F1F",        // deep gray for main elements
+    background: "#121212",     // true dark background
+    text: "#E0E0E0",           // light gray for general text
+    border: "#2C2C2C",         // subtle border contrast
+    white: "#FFFFFF",          // for accents or highlights
+    textLight: "#A0A0A0",      // secondary/descriptive text
+    expense: "#FF6B6B",        // vibrant red-pink for expenses
+    income: "#4CAF50",         // vivid green for income
+    card: "#1E1E1E",           // card backgrounds slightly lifted
+    shadow: "#000000",         // real shadows for depth
+};
+
 
 export const THEMES = {
     coffee: coffeeTheme,
     forest: forestTheme,
     purple: purpleTheme,
     ocean: oceanTheme,
+    sunrise: sunriseTheme,
+    aurora: auroraTheme,
+    tealGlow: tealGlowTheme,
+    goldenHour: goldenHourTheme,
+    midnight: midnightTheme,
+    blush: blushTheme,
+    dark: darkTheme,
 };
+
+
 
 // 👇 change this to switch theme
 export const COLORS = THEMES.forest;

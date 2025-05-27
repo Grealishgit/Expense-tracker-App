@@ -1,12 +1,11 @@
 import * as React from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, Image, TextInput, TouchableOpacity, View } from 'react-native'
 import { useSignUp } from '@clerk/clerk-expo'
 import { Link, useRouter } from 'expo-router'
 import { useState } from 'react'
 import { styles } from '@/assets/styles/auth.styles.js'
 import { Ionicons } from '@expo/vector-icons'
 import { COLORS } from '../../constants/colors.js'
-import { Image } from 'expo-image'
 import revenue from '../../assets/images/revenue-i2.png'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
