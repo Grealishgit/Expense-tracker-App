@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Expenses-Tracker",
+    "name": "Expense-Tracker",
     "slug": "mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -34,18 +34,6 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ],
-      [
-        "expo-contacts",
-        {
-          "contactsPermission": "Allow $(PRODUCT_NAME) to access your contacts."
-        }
-      ],
-      [
-        "expo-location",
-        {
-          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
-        }
       ]
     ],
     "experiments": {
@@ -55,7 +43,8 @@
       "router": {},
       "eas": {
         "projectId": "056df5cf-3e67-4e71-bab6-fb40788b4084"
-      }
+      },
+      "CLERK_PUBLISHABLE_KEY": "pk_test_dmFsdWVkLWdlY2tvLTkxLmNsZXJrLmFjY291bnRzLmRldiQ"
     }
   }
 }

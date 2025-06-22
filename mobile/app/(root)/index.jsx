@@ -81,11 +81,11 @@ export default function Page() {
                 <BalanceCard summary={summary} />
                 <View style={styles.transactionsHeaderContainer}>
                     <Text style={styles.sectionTitle}>Recent Transactions</Text>
-                    <TouchableOpacity>
+                    {/* <TouchableOpacity>
                         <Link href="/mpesa" asChild>
                             <Text style={styles.viewAllText}>View All</Text>
                         </Link>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                 </View>
             </View>
