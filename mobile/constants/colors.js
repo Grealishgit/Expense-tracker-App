@@ -140,6 +140,45 @@ const darkTheme = {
     shadow: "#000000",         // real shadows for depth
 };
 
+const blueTheme = {
+    primary: "#1967fc",      // Keep your blue primary
+    background: "#E3F2FD",   // Light blue background (was #FCE4EC)
+    text: "#0D47A1",         // Dark blue text (was #880E4F)
+    border: "#90CAF9",       // Medium blue border (was #F8BBD0)
+    white: "#FFFFFF",        // Keep white
+    textLight: "#64B5F6",    // Light blue text (was #F48FB1)
+    expense: "#E57373",      // Keep red for expenses
+    income: "#81C784",       // Keep green for income
+    card: "#FFFFFF",         // Keep white cards
+    shadow: "#90CAF9",       // Blue shadow (was #F48FB1)
+};
+
+const deepBlueTheme = {
+    primary: "#1565C0",
+    background: "#E1F5FE",
+    text: "#0D47A1",
+    border: "#81D4FA",
+    white: "#FFFFFF",
+    textLight: "#4FC3F7",
+    expense: "#EF5350",
+    income: "#66BB6A",
+    card: "#FFFFFF",
+    shadow: "#81D4FA",
+};
+
+const azureBlueTheme = {
+    primary: "#2196F3",
+    background: "#F5F9FF",
+    text: "#1976D2",
+    border: "#BBDEFB",
+    white: "#FFFFFF",
+    textLight: "#64B5F6",
+    expense: "#FF5252",
+    income: "#4CAF50",
+    card: "#FFFFFF",
+    shadow: "#BBDEFB",
+    accent: "#2979FF",
+};
 
 export const THEMES = {
     coffee: coffeeTheme,
@@ -153,9 +192,13 @@ export const THEMES = {
     midnight: midnightTheme,
     blush: blushTheme,
     dark: darkTheme,
+    blue: blueTheme,
+    deepOcean: deepBlueTheme,
+    azureTheme: azureBlueTheme
+
 };
 
 
 
 // 👇 change this to switch theme
-export const COLORS = THEMES.forest;
+export const COLORS = THEMES.blue;

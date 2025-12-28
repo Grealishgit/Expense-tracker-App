@@ -73,19 +73,21 @@ export default function Page() {
                         <SignOutButton />
                     </View>
                 </View>
+
                 {/* <TouchableOpacity style={{ borderWidth: 1, borderRadius: 8, padding: 5, flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: '#000', marginBottom: 10 }}
                     onPress={() => router.push('/mpesa')}>
                     <Ionicons name="person-circle-outline" size={24} color="#fff" />
                     <Text style={{ color: 'red' }}>Profile</Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity>  */}
+
                 <BalanceCard summary={summary} />
                 <View style={styles.transactionsHeaderContainer}>
                     <Text style={styles.sectionTitle}>Recent Transactions</Text>
-                    {/* <TouchableOpacity>
+                    <TouchableOpacity>
                         <Link href="/mpesa" asChild>
                             <Text style={styles.viewAllText}>View All</Text>
                         </Link>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity> 
 
                 </View>
             </View>

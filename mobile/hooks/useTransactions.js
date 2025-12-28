@@ -7,7 +7,7 @@ import { API_URL } from "../constants/api"; // Adjust the import path as necessa
 export const useTransactions = (userId) => {
     const [transactions, setTransactions] = useState([]);
 
-    // const API_URL = 'https://expense-tracker-app-1owp.onrender.com/api'; // Replace with your API URL
+    const API_URL = 'https://expense-tracker-app-ten-zeta.vercel.app/api'; // Replace with your API URL
 
     const [summary, setSummary] = useState({
         balance: 0,

@@ -6,7 +6,6 @@ const rateLimiter = async (req, res, next) => {
         // const result = await ratelimit.limit(ip);
 
         const { success } = await ratelimit.limit('my-rate-limit')
-
         if (!success) {
             return res.status(429).json({ error: 'Too many requests, please try again later.' });
         }
