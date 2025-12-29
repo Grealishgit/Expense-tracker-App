@@ -13,13 +13,13 @@ export default function Layout() {
 
     return (
         <Tabs
-            initialRouteName="home"
+            initialRouteName="index"
             screenOptions={{
                 tabBarActiveTintColor: COLORS.primary,
                 tabBarInactiveTintColor: COLORS.secondary,
                 tabBarShowLabel: true,
                 tabBarStyle: {
-                    backgroundColor: COLORS.white,
+                    backgroundColor: COLORS.card,
                     borderRadius: 30,
                     overflow: 'hidden',
                     height: 65,
@@ -30,7 +30,7 @@ export default function Layout() {
                 tabBarItemStyle: {
                     justifyContent: 'center',
                     alignItems: 'center',
-                    paddingVertical: 15,
+                    paddingVertical: 5,
                 },
                 tabBarLabelStyle: {
                     fontSize: 12,

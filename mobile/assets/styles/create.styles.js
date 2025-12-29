@@ -34,6 +34,17 @@ export const styles = StyleSheet.create({
         padding: 5,
         gap: 4,
     },
+    saveButtonContainerLarge: {
+        flexDirection: "row",
+        width: '100%',
+        marginTop: 8,
+        backgroundColor: COLORS.primary,
+        borderRadius: 8,
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 12,
+        gap: 4,
+    },
     saveButtonDisabled: {
         opacity: 0.5,
         width: 90,

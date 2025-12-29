@@ -181,6 +181,19 @@ const Create = () => {
                     ))}
 
                 </View>
+
+                <TouchableOpacity style={[styles.saveButtonContainerLarge, isLoading && styles.saveButtonDisabled]}
+                    onPress={handleCreateTransaction}
+                    disabled={isLoading}
+                >
+                    <Text style={styles.saveButton}>{isLoading ? 'Saving a transaction...' : 'Save Transaction'}</Text>
+                    {isLoading ? (
+                        <Ionicons name="rocket-sharp" size={24} color={COLORS.white} />
+                    ) : (
+                        <Ionicons name="checkmark-done-circle-outline" size={24} color={COLORS.white} />
+                    )}
+
+                </TouchableOpacity>
             </View>
             {isLoading && (
                 <View style={styles.loadingContainer}>
