@@ -106,7 +106,7 @@ const KcbTransactions = () => {
 
                 {/* Income and Expense Cards Row */}
                 <View style={styles.summaryRow}>
-                    <View style={[styles.summaryCard, { backgroundColor: '#2fc56e' }]}>
+                    <View style={[styles.summaryCard, { backgroundColor: '#8ec73d' }]}>
                         <View style={styles.summaryHeader}>
                             <Text style={styles.summaryLabel}>Total Income</Text>
                             <Text style={styles.summaryIcon}>💰</Text>
@@ -117,7 +117,7 @@ const KcbTransactions = () => {
                         </Text>
                     </View>
 
-                    <View style={[styles.summaryCard, { backgroundColor: '#eb4d26ff' }]}>
+                    <View style={[styles.summaryCard, { backgroundColor: '#00436a' }]}>
                         <View style={styles.summaryHeader}>
                             <Text style={styles.summaryLabel}>Total Expenses</Text>
                             <Text style={styles.summaryIcon}>💸</Text>
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
         marginTop: 4
     },
     importButton: {
-        backgroundColor: '#2fc56e',
+        backgroundColor: '#8ec73d',
         borderRadius: 8,
         width: '100%',
         padding: 15,
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     badge: {
-        backgroundColor: "#2fc56e",
+        backgroundColor: "#8ec73d",
         borderRadius: 12,
         paddingHorizontal: 12,
         paddingVertical: 4,
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
         elevation: 2,
     },
     transactionIncome: {
-        borderLeftColor: "#28a745",
+        borderLeftColor: "#8ec73d",
         borderRightColor: 'transparent',
     },
     transactionExpense: {
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
         fontWeight: "600",
     },
     incomeText: {
-        color: "#28a745",
+        color: "#8ec73d",
     },
     expenseText: {
         color: "#dc3545",
@@ -364,7 +364,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     totalBalanceCard: {
-        backgroundColor: '#2fc56e',
+        backgroundColor: '#8ec73d',
         borderRadius: 5,
         padding: 8,
         alignItems: 'center',
