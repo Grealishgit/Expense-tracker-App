@@ -52,14 +52,6 @@ export default function Layout() {
                         <MaterialIcons name='currency-exchange' color={color} size={size}
                         />
                 }} />
-            <Tabs.Screen name='create'
-                options={{
-                    title: 'Create',
-                    headerShown: false,
-                    tabBarIcon: ({ color, size }) =>
-                        <FontAwesome6 name='circle-plus' color={color} size={size}
-                        />
-                }} />
             <Tabs.Screen name='mpesa'
                 options={{
                     title: 'MPESA',
@@ -68,6 +60,15 @@ export default function Layout() {
                         <Ionicons name='wallet' color={color} size={size}
                         />
                 }} />
+            <Tabs.Screen name='create'
+                options={{
+                    title: 'Create',
+                    headerShown: false,
+                    tabBarIcon: ({ color, size }) =>
+                        <FontAwesome6 name='circle-plus' color={color} size={size}
+                        />
+                }} />
+
             <Tabs.Screen name='profile'
                 options={{
                     title: 'Profile',
