@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import { View, Text, Button, Alert, FlatList, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { View, Text, Button, Alert, FlatList, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { LinearGradient } from 'expo-linear-gradient';
 import {
   requestSmsPermission,
   fetchMpesaMessages,
   parseMpesaMessage,
 } from "../../services/mpesa"
 import { COLORS } from '../../constants/colors'
+import mpesa from '../../assets/mpesa.jpg';
+import loop from '../../assets/loop.png';
+import kcb from '../../assets/kcb.png';
+
 
 export default function MpesaPage() {
   const [transactions, setTransactions] = useState([]);
-  const [activeProvider, setActiveProvider] = useState(null);
+  const [activeProvider, setActiveProvider] = useState('mpesa');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleProviderSelect = (provider) => {
@@ -56,9 +61,9 @@ export default function MpesaPage() {
   };
 
   const providers = [
-    { id: 'mpesa', name: 'M-Pesa', icon: '💳' },
-    { id: 'kcb', name: 'KCB', icon: '🏦' },
-    { id: 'loop', name: 'Loop', icon: '🔄' }
+    { id: 'mpesa', name: 'M-Pesa', image: mpesa },
+    { id: 'kcb', name: 'KCB', image: kcb },
+    { id: 'loop', name: 'Loop', image: loop }
   ];
 
 
@@ -88,16 +93,13 @@ export default function MpesaPage() {
             <TouchableOpacity
               key={provider.id}
               onPress={() => handleProviderSelect(provider.name)}
-              style={[
-                styles.providerCard,
-                activeProvider === provider.name && styles.providerCardActive
-              ]}
-            >
-              <Text style={styles.providerIcon}>{provider.icon}</Text>
-              <Text style={[
-                styles.providerName,
-                activeProvider === provider.name && styles.providerNameActive
-              ]}>
+              style={styles.providerCard}>
+              <Image
+                source={provider.image}
+                style={[styles.providerImage, activeProvider === provider.name && styles.providerImageActive]}
+                resizeMode="cover"
+              />
+              <Text style={[styles.providerName, activeProvider === provider.name && styles.providerNameActive]}>
                 {provider.name}
               </Text>
             </TouchableOpacity>
@@ -264,33 +266,36 @@ const styles = StyleSheet.create({
   },
   providerCard: {
     flex: 1,
-    backgroundColor: "white",
+    position: "relative",
     borderRadius: 8,
-    padding: 8,
+    width: '100%',
+    height: 70,
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#e9ecef",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 0.4,
   },
-  providerCardActive: {
-    borderColor: COLORS.primary,
-    backgroundColor: "#f0f7ff",
-  },
-  providerIcon: {
-    fontSize: 25,
+
+  providerImage: {
+    width: '100%',
+    height: '100%',
     marginBottom: 4,
+    borderRadius: 8,
+    opacity: 0.2,
+  },
+  providerImageActive: {
+    opacity: 1,
   },
   providerName: {
+    position: "absolute",
+    bottom: 22,
+    left: 8,
+    right: 8,
+    textAlign: "center",
+    color: COLORS.black,
     fontSize: 18,
-    fontWeight: "600",
-    color: "#495057",
+    fontWeight: "bold",
   },
+
   providerNameActive: {
-    color: COLORS.primary,
+    display: "none",
   },
   importButton: {
     backgroundColor: COLORS.primary,
