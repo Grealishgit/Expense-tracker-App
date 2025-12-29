@@ -4,7 +4,7 @@ import {
   requestSmsPermission,
   fetchMpesaMessages,
   parseMpesaMessage,
-} from "../services/mpesa"
+} from "../../services/mpesa"
 // import { saveTransaction } from "../db/transactions"; 
 import { COLORS } from '../../constants/colors'
 
