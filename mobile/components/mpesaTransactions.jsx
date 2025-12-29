@@ -107,7 +107,7 @@ const MpesaTransactions = () => {
 
                 {/* Income and Expense Cards Row */}
                 <View style={styles.summaryRow}>
-                    <View style={[styles.summaryCard, { borderWidth: 1, borderColor: 'green' }]}>
+                    <View style={[styles.summaryCard, { backgroundColor: '#2fc56e' }]}>
                         <View style={styles.summaryHeader}>
                             <Text style={styles.summaryLabel}>Total Income</Text>
                             <Text style={styles.summaryIcon}>💰</Text>
@@ -118,7 +118,7 @@ const MpesaTransactions = () => {
                         </Text>
                     </View>
 
-                    <View style={[styles.summaryCard, { borderWidth: 1, borderColor: 'red' }]}>
+                    <View style={[styles.summaryCard, { backgroundColor: '#eb4d26ff' }]}>
                         <View style={styles.summaryHeader}>
                             <Text style={styles.summaryLabel}>Total Expenses</Text>
                             <Text style={styles.summaryIcon}>💸</Text>
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
         marginTop: 4
     },
     importButton: {
-        backgroundColor: COLORS.primary,
+        backgroundColor: '#2fc56e',
         borderRadius: 8,
         width: '100%',
         padding: 15,
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     badge: {
-        backgroundColor: COLORS.primary,
+        backgroundColor: "#2fc56e",
         borderRadius: 12,
         paddingHorizontal: 12,
         paddingVertical: 4,
@@ -364,7 +364,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     totalBalanceCard: {
-        backgroundColor: COLORS.primary,
+        backgroundColor: '#2fc56e',
         borderRadius: 5,
         padding: 8,
         alignItems: 'center',
@@ -402,7 +402,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.05,
         shadowRadius: 4,
-        elevation: 0.5,
+        elevation: 0.2,
     },
     summaryHeader: {
         flexDirection: 'row',
@@ -417,7 +417,7 @@ const styles = StyleSheet.create({
     },
     summaryLabel: {
         fontSize: 14,
-        color: '#6c757d',
+        color: '#ffffff',
         marginBottom: 8,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -425,11 +425,11 @@ const styles = StyleSheet.create({
     incomeAmount: {
         fontSize: 25,
         fontWeight: '700',
-        color: '#28a745',
+        color: '#ffffff',
     },
     expenseAmount: {
         fontSize: 25,
         fontWeight: '700',
-        color: '#dc3545',
+        color: '#ffffff',
     },
 })
