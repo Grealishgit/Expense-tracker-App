@@ -61,6 +61,17 @@ export default function MpesaPage() {
     { id: 'loop', name: 'Loop', icon: '🔄' }
   ];
 
+
+  const totalIncome = transactions.reduce((total, transaction) => {
+    return transaction.type === 'income' ? total + transaction.amount : total;
+  }, 0);
+
+  const totalExpenses = transactions.reduce((total, transaction) => {
+    return transaction.type === 'expense' ? total + transaction.amount : total;
+  }, 0);
+
+  const totalBalance = totalIncome + totalExpenses;
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -114,6 +125,43 @@ export default function MpesaPage() {
             )}
           </Text>
         </TouchableOpacity>
+      </View>
+
+      {/* Statcard for expenses and income */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Summary</Text>
+
+        {/* Total Balance Card */}
+        <View style={styles.totalBalanceCard}>
+          <Text style={styles.balanceLabel}>Total Transactions</Text>
+          <Text style={styles.balanceAmount}>
+            Ksh {totalBalance.toLocaleString()}
+          </Text>
+        </View>
+
+        {/* Income and Expense Cards Row */}
+        <View style={styles.summaryRow}>
+          <View style={[styles.summaryCard, { borderWidth: 1, borderColor: 'green' }]}>
+            <View style={styles.summaryHeader}>
+              <Text style={styles.summaryLabel}>Total Income</Text>
+              <Text style={styles.summaryIcon}>💰</Text>
+            </View>
+
+            <Text style={styles.incomeAmount}>
+              Ksh {totalIncome.toLocaleString()}
+            </Text>
+          </View>
+
+          <View style={[styles.summaryCard, { borderWidth: 1, borderColor: 'red' }]}>
+            <View style={styles.summaryHeader}>
+              <Text style={styles.summaryLabel}>Total Expenses</Text>
+              <Text style={styles.summaryIcon}>💸</Text>
+            </View>
+            <Text style={styles.expenseAmount}>
+              Ksh {totalExpenses.toLocaleString()}
+            </Text>
+          </View>
+        </View>
       </View>
 
       {/* Transactions List */}
@@ -186,11 +234,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8f9fa",
   },
   header: {
-    padding: 20,
-    paddingTop: 16,
-    backgroundColor: "white",
-    borderBottomWidth: 1,
-    borderBottomColor: "#e9ecef",
+    padding: 12,
+    paddingTop: 5,
   },
   headerTitle: {
     fontSize: 28,
@@ -215,32 +260,32 @@ const styles = StyleSheet.create({
   providerGrid: {
     flexDirection: "row",
     justifyContent: "space-between",
-    gap: 12,
+    gap: 10,
   },
   providerCard: {
     flex: 1,
     backgroundColor: "white",
     borderRadius: 8,
-    padding: 16,
+    padding: 8,
     alignItems: "center",
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: "#e9ecef",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 4,
-    elevation: 2,
+    elevation: 0.4,
   },
   providerCardActive: {
     borderColor: COLORS.primary,
     backgroundColor: "#f0f7ff",
   },
   providerIcon: {
-    fontSize: 32,
-    marginBottom: 8,
+    fontSize: 25,
+    marginBottom: 4,
   },
   providerName: {
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: "600",
     color: "#495057",
   },
@@ -369,5 +414,84 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 16,
     paddingHorizontal: 20,
+  },
+  section: {
+    marginTop: 8,
+    paddingHorizontal: 20,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#212529',
+    marginBottom: 5,
+  },
+  totalBalanceCard: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 5,
+    padding: 8,
+    alignItems: 'center',
+    marginBottom: 8,
+    shadowColor: COLORS.primary,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  balanceLabel: {
+    fontSize: 18,
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontWeight: '600',
+  },
+  balanceAmount: {
+    fontSize: 32,
+    fontWeight: '700',
+    color: 'white',
+  },
+  summaryRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 12,
+  },
+  summaryCard: {
+    flex: 1,
+    backgroundColor: 'white',
+    borderRadius: 8,
+    padding: 8,
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#e9ecef',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 0.5,
+  },
+  summaryHeader: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  summaryIcon: {
+    fontSize: 28,
+    marginBottom: 4,
+  },
+  summaryLabel: {
+    fontSize: 14,
+    color: '#6c757d',
+    marginBottom: 8,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  incomeAmount: {
+    fontSize: 25,
+    fontWeight: '700',
+    color: '#28a745',
+  },
+  expenseAmount: {
+    fontSize: 25,
+    fontWeight: '700',
+    color: '#dc3545',
   },
 });
