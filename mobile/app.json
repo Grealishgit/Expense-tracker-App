@@ -47,9 +47,10 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "056df5cf-3e67-4e71-bab6-fb40788b4084"
+        "projectId": "e2a0a606-83a5-4cc2-82b7-f5b697ede65e"
       },
       "CLERK_PUBLISHABLE_KEY": "pk_test_dmFsdWVkLWdlY2tvLTkxLmNsZXJrLmFjY291bnRzLmRldiQ"
-    }
+    },
+    "owner": "hunter42"
   }
 }
