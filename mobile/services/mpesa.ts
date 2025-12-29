@@ -81,7 +81,10 @@ export interface MpesaTransaction {
 export function parseMpesaMessage(body: string): MpesaTransaction | null {
     // Extract transaction ID
     const idMatch = body.match(/^([A-Z0-9]+)\s/);
-    const transactionId = idMatch?.[1] ?? `TX-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const transactionId = idMatch?.[1] || `TX-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
+
+    console.log('Parsing message:', body.substring(0, 50) + '...');
+    console.log('Extracted ID:', transactionId);
 
     // Extract amount
     const amountMatch = body.match(/Ksh\s?([\d,]+\.\d{2})/i);

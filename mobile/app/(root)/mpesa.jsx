@@ -48,9 +48,12 @@ export default function MpesaPage() {
       const parsedTransactions = sms
         .map(msg => parseMpesaMessage(msg.body))
         .filter(Boolean)
+        .filter((transaction, index, self) =>
+          index === self.findIndex(t => t.id === transaction.id)
+        ) // Remove duplicates by ID
         .sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime()); // Sort by date, newest first
 
-      mpesaTransactions(parsedTransactions);
+      setMpesaTransactions(parsedTransactions);
 
       // Alert.alert(
       //   "Success",
@@ -230,7 +233,11 @@ export default function MpesaPage() {
             <FlatList
               data={mpesaTransactions}
               scrollEnabled={true}
-              keyExtractor={item => item.id?.toString() ?? Math.random().toString()}
+              keyExtractor={(item, index) => {
+                const key = item.id?.toString() || `fallback-${index}-${Date.now()}`;
+                // console.log('Transaction key:', key, 'for item:', item.title);
+                return key;
+              }}
               renderItem={({ item }) => (
                 <View style={[
                   styles.transactionCard,
