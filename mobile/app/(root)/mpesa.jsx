@@ -40,7 +40,7 @@ export default function MpesaPage() {
     // }
 
     Alert.alert("Success", `Imported ${parsedTransactions.length} transactions`);
-    console.log('Imported Transactions:', parsedTransactions);
+    // console.log('Imported Transactions:', parsedTransactions);
   };
 
   return (
@@ -53,6 +53,11 @@ export default function MpesaPage() {
 
       <View style={{ marginTop: 16 }}>
         <Text style={{ fontWeight: "600" }}>Imported Transactions</Text>
+        <View>
+          <Text style={{ fontSize: 12, opacity: 0.6 }}>
+            {transactions.length} transaction(s) imported
+          </Text>
+        </View>
 
         <FlatList
           data={transactions}
@@ -64,9 +69,11 @@ export default function MpesaPage() {
                 marginTop: 8,
                 borderWidth: 1,
                 borderRadius: 8,
+                backgroundColor: item.type === "income" ? "#e6ffe6" : "#ffe6e6",
+                borderColor: item.type === "income" ? "green" : "red"
               }}
             >
-              <Text>Type: {item.type}</Text>
+              <Text style={{ color: item.type === "income" ? "green" : "red" }}>Type: {item.type}</Text>
               <Text>Party: {item.party}</Text>
               <Text>Amount: Ksh {item.amount}</Text>
             </View>
