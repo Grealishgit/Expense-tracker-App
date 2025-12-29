@@ -1,5 +1,5 @@
 import { useUser } from "@clerk/clerk-expo";
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome6, Ionicons } from "@expo/vector-icons";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Redirect, Tabs } from "expo-router";
 import { Stack } from "expo-router/stack";
@@ -57,7 +57,7 @@ export default function Layout() {
                     title: 'Create',
                     headerShown: false,
                     tabBarIcon: ({ color, size }) =>
-                        <Ionicons name='add' color={color} size={size}
+                        <FontAwesome6 name='circle-plus' color={color} size={size}
                         />
                 }} />
             <Tabs.Screen name='mpesa'
@@ -65,7 +65,7 @@ export default function Layout() {
                     title: 'MPESA',
                     headerShown: false,
                     tabBarIcon: ({ color, size }) =>
-                        <MaterialIcons name='textsms' color={color} size={size}
+                        <Ionicons name='wallet' color={color} size={size}
                         />
                 }} />
             <Tabs.Screen name='profile'
