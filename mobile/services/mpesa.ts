@@ -131,3 +131,37 @@ export function parseKCBMessage(body: string) {
 }
 
 
+export const fethLoopMessages = async () => {
+    const filter = {
+        box: "inbox",
+        address: "LOOP",
+        maxCount: 200,
+    };
+
+    return new Promise((resolve, reject) => {
+        SmsAndroid.list(
+            JSON.stringify(filter),
+            (fail: any) => reject(fail),
+            (count: number, smsList: string) => resolve(JSON.parse(smsList))
+        );
+    });
+};
+
+export function parseLoopMessage(body: string) {
+    const amountMatch = body.match(/Ksh\s?([\d,]+\.\d{2})/i);
+    const debitMatch = body.match(/debited/i);
+    const creditMatch = body.match(/credited/i);
+    const fromMatch = body.match(/from ([A-Za-z0-9\s]+)/i);
+    const toMatch = body.match(/to ([A-Za-z0-9\s]+)/i);
+    const amount = amountMatch
+        ? parseFloat(amountMatch[1].replace(/,/g, ""))
+        : null;
+    if (debitMatch) {
+        return { type: "expense", party: toMatch?.[1] ?? "Unknown", amount };
+    }
+    if (creditMatch) {
+        return { type: "income", party: fromMatch?.[1] ?? "Unknown", amount };
+    }
+    return null;
+}
+
