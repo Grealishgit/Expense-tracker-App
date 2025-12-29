@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 import { View, Text, Button, Alert, FlatList, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { LinearGradient } from 'expo-linear-gradient';
 import {
     requestSmsPermission,
     fetchMpesaMessages,

@@ -10,11 +10,11 @@ export async function requestSmsPermission() {
     // console.log('Has READ_SMS:', hasRead, 'Has RECEIVE_SMS:', hasReceive);
 
     if (hasRead && hasReceive) {
-        console.log('Both permissions already granted.');
+        // console.log('Both permissions already granted.');
         return true;
     }
 
-    console.log('Requesting SMS permissions...');
+    // console.log('Requesting SMS permissions...');
     const granted = await PermissionsAndroid.requestMultiple([
         PermissionsAndroid.PERMISSIONS.READ_SMS,
         PermissionsAndroid.PERMISSIONS.RECEIVE_SMS

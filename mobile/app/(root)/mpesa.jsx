@@ -14,12 +14,10 @@ import loop from '../../assets/loop.png';
 import kcb from '../../assets/kcb.png';
 import MpesaTransactions from "../../components/mpesaTransactions";
 import KcbTransactions from "../../components/kcbTransactions";
+import LoopTransactions from "../../components/loopTransactions";
 
 
 export default function MpesaPage() {
-
-
-  const [loopTransactions, setLoopTransactions] = useState([]);
   const [activeProvider, setActiveProvider] = useState('mpesa');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,12 +40,11 @@ export default function MpesaPage() {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>SIM Transactions</Text>
-        <Text style={styles.headerSubtitle}>Import and manage your transactions</Text>
       </View>
 
       {/* Provider Selection */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Select Provider</Text>
+        <Text style={styles.sectionTitle}>Select Available Provider</Text>
         <View style={styles.providerGrid}>
           {providers.map((provider) => (
             <TouchableOpacity
@@ -75,9 +72,9 @@ export default function MpesaPage() {
         <KcbTransactions />
       )}
 
-      {/* {activeProvider === 'loop' && (
+      {activeProvider === 'loop' && (
         <LoopTransactions />
-      )} */}
+      )}
 
 
 
@@ -98,21 +95,19 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "700",
     color: "#212529",
-    marginBottom: 4,
   },
   headerSubtitle: {
     fontSize: 14,
     color: "#6c757d",
   },
   section: {
-    marginTop: 16,
     paddingHorizontal: 20,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: "600",
     color: "#212529",
-    marginBottom: 12,
+    marginBottom: 5,
   },
   providerGrid: {
     flexDirection: "row",

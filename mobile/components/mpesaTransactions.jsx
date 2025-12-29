@@ -30,7 +30,7 @@ const MpesaTransactions = () => {
         }
 
         try {
-            console.log('Fetching M-Pesa messages...');
+            // console.log('Fetching M-Pesa messages...');
             const sms = await fetchMpesaMessages();
 
             const parsedTransactions = sms
