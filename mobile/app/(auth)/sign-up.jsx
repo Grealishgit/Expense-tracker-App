@@ -148,15 +148,15 @@ export default function SignUpScreen() {
                             value={password}
                             placeholder="Enter password"
                             placeholderTextColor="#9a8478"
-                            secureTextEntry={showPassword ? true : false}
+                            secureTextEntry={showPassword ? false : true}
                             onChangeText={(password) => setPassword(password)}
                             style={[styles.input, error && styles.errorInput]}
                         />
                         <TouchableOpacity style={{ position: 'absolute', top: 14, right: 8 }} onPress={() => setShowPassord(!showPassword)}>
                             {showPassword ? (
-                                <Ionicons name='eye-off' size={20} color={COLORS.primary} />
-                            ) : (
                                 <Ionicons name='eye' size={20} color={COLORS.primary} />
+                            ) : (
+                                    <Ionicons name='eye-off' size={20} color={COLORS.primary} />
                             )}
                         </TouchableOpacity>
                     </View>

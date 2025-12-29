@@ -64,31 +64,24 @@ export default function Page() {
                         </View>
                     </View>
 
+
                     {/* RIGHT */}
                     <View style={styles.headerRight}>
                         <TouchableOpacity style={styles.addButton} onPress={() => router.push('/create')}>
-                            <Ionicons name="add" size={18} color="white" />
+                            <Ionicons name="add" size={20} color="white" />
                             <Text style={styles.addButtonText}>Add</Text>
                         </TouchableOpacity>
                         <SignOutButton />
                     </View>
                 </View>
-
-                {/* <TouchableOpacity style={{ borderWidth: 1, borderRadius: 8, padding: 5, flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: '#000', marginBottom: 10 }}
-                    onPress={() => router.push('/mpesa')}>
-                    <Ionicons name="person-circle-outline" size={24} color="#fff" />
-                    <Text style={{ color: 'red' }}>Profile</Text>
-                </TouchableOpacity>  */}
-
                 <BalanceCard summary={summary} />
-                <View style={styles.transactionsHeaderContainer}>
-                    <Text style={styles.sectionTitle}>Recent Transactions</Text>
-                    <TouchableOpacity>
-                        <Link href="/mpesa" asChild>
-                            <Text style={styles.viewAllText}>View All</Text>
-                        </Link>
-                    </TouchableOpacity> 
 
+                <View style={styles.transactionsHeaderContainer}>
+                    <Text style={styles.sectionTitle}>SIM Transactions</Text>
+                    <TouchableOpacity style={styles.viewButton} onPress={() => router.push('/mpesa')}>
+                        <Ionicons name="list-outline" size={20} color="white" />
+                        <Text style={styles.viewButtonText}>View</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             <FlatList

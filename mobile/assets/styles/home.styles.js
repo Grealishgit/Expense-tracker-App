@@ -40,6 +40,8 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "600",
         color: COLORS.text,
+        textTransform: "capitalize",
+
     },
     headerRight: {
         flexDirection: "row",
@@ -53,8 +55,8 @@ export const styles = StyleSheet.create({
     },
     addButton: {
         backgroundColor: COLORS.primary,
-        paddingHorizontal: 18,
-        paddingVertical: 8,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
         borderRadius: 8,
         flexDirection: "row",
         alignItems: "center",
@@ -66,7 +68,8 @@ export const styles = StyleSheet.create({
     },
     addButtonText: {
         color: COLORS.white,
-        fontWeight: "600",
+        fontSize: 16,
+        fontWeight: "bold",
         marginLeft: 4,
     },
     logoutButton: {
@@ -80,7 +83,7 @@ export const styles = StyleSheet.create({
         elevation: 1,
     },
     balanceCard: {
-        backgroundColor: COLORS.card,
+        backgroundColor: COLORS.primary,
         borderRadius: 8,
         padding: 20,
         marginBottom: 20,
@@ -95,13 +98,13 @@ export const styles = StyleSheet.create({
     },
     balanceTitle: {
         fontSize: 16,
-        color: COLORS.primary,
+        color: COLORS.white,
         marginBottom: 8,
     },
     balanceAmount: {
         fontSize: 32,
         fontWeight: "bold",
-        color: COLORS.text,
+        color: COLORS.white,
         marginBottom: 20,
     },
     balanceStats: {
@@ -118,18 +121,18 @@ export const styles = StyleSheet.create({
     },
     balanceStatLabel: {
         fontSize: 14,
-        color: COLORS.textLight,
+        color: COLORS.white,
         marginBottom: 4,
     },
     balanceStatAmount: {
         fontSize: 18,
         fontWeight: "600",
+
     },
     sectionTitle: {
         fontSize: 18,
         fontWeight: "600",
         color: COLORS.text,
-        marginBottom: 15,
     },
     transactionCard: {
         backgroundColor: COLORS.card,
@@ -254,6 +257,19 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         marginBottom: 10,
         paddingBottom: 5,
+    },
+    viewButton: {
+        backgroundColor: COLORS.primary,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        borderRadius: 8,
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    viewButtonText: {
+        color: COLORS.white,
+        fontWeight: "600",
+        marginLeft: 8,
     },
     transactionsList: {
         flex: 1,
