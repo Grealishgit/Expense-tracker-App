@@ -13,11 +13,12 @@ import mpesa from '../../assets/mpesa.jpg';
 import loop from '../../assets/loop.png';
 import kcb from '../../assets/kcb.png';
 import MpesaTransactions from "../../components/mpesaTransactions";
+import KcbTransactions from "../../components/kcbTransactions";
 
 
 export default function MpesaPage() {
 
-  const [kcbTransactions, setKcbTransactions] = useState([]);
+
   const [loopTransactions, setLoopTransactions] = useState([]);
   const [activeProvider, setActiveProvider] = useState('mpesa');
   const [isLoading, setIsLoading] = useState(false);
@@ -26,43 +27,6 @@ export default function MpesaPage() {
     setActiveProvider(provider.id);
   };
 
-
-
-  const handleImportKCBTransactions = async () => {
-    setIsLoading(true);
-    const allowed = await requestSmsPermission();
-
-    if (!allowed) {
-      setIsLoading(false);
-      return Alert.alert(
-        "Permission Denied",
-        "SMS permission is required to import KCB transactions."
-      );
-    }
-
-    try {
-      console.log('Fetching KCB messages...');
-      const sms = await fetchKCBMessages();
-
-      const parsedTransactions = sms
-        .map(msg => parseKCBMessage(msg.body))
-        .filter(Boolean)
-        .sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime()); // Sort by date, newest first
-
-      setKcbTransactions(parsedTransactions);
-
-      Alert.alert(
-        "Success",
-        `Successfully imported ${parsedTransactions.length} KCB transaction${parsedTransactions.length !== 1 ? 's' : ''}`
-      );
-      console.log('Imported KCB transactions:', parsedTransactions);
-    } catch (error) {
-      Alert.alert("Error", "Failed to import KCB transactions. Please try again.");
-      console.error('KCB import error:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const providers = [
     { id: 'mpesa', name: 'M-Pesa', image: mpesa },
@@ -106,6 +70,14 @@ export default function MpesaPage() {
       {activeProvider === 'mpesa' && (
         <MpesaTransactions />
       )}
+
+      {activeProvider === 'kcb' && (
+        <KcbTransactions />
+      )}
+
+      {/* {activeProvider === 'loop' && (
+        <LoopTransactions />
+      )} */}
 
 
 
