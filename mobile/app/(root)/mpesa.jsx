@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { View, Text, Button, Alert, FlatList, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -6,6 +6,7 @@ import {
   requestSmsPermission,
   fetchMpesaMessages,
   parseMpesaMessage,
+  formatDate,
 } from "../../services/mpesa"
 import { COLORS } from '../../constants/colors'
 import mpesa from '../../assets/mpesa.jpg';
@@ -14,19 +15,21 @@ import kcb from '../../assets/kcb.png';
 
 
 export default function MpesaPage() {
-  const [transactions, setTransactions] = useState([]);
+  const [mpesaTransactions, setMpesaTransactions] = useState([]);
+  const [kcbTransactions, setKcbTransactions] = useState([]);
+  const [loopTransactions, setLoopTransactions] = useState([]);
   const [activeProvider, setActiveProvider] = useState('mpesa');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleProviderSelect = (provider) => {
     setActiveProvider(provider);
-    Alert.alert(
-      `${provider} Selected`,
-      `You've selected ${provider} transactions. This will filter transactions from this provider.`
-    );
+    // Alert.alert(
+    //   `${provider} Selected`,
+    //   `You've selected ${provider} transactions. This will filter transactions from this provider.`
+    // );
   };
 
-  const handleImport = async () => {
+  const handleImportMpesaTransactions = async () => {
     setIsLoading(true);
     const allowed = await requestSmsPermission();
 
@@ -44,17 +47,55 @@ export default function MpesaPage() {
 
       const parsedTransactions = sms
         .map(msg => parseMpesaMessage(msg.body))
-        .filter(Boolean);
+        .filter(Boolean)
+        .sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime()); // Sort by date, newest first
 
-      setTransactions(parsedTransactions);
+      mpesaTransactions(parsedTransactions);
 
-      Alert.alert(
-        "Success",
-        `Successfully imported ${parsedTransactions.length} transaction${parsedTransactions.length !== 1 ? 's' : ''}`
-      );
+      // Alert.alert(
+      //   "Success",
+      //   `Successfully imported ${parsedTransactions.length} transaction${parsedTransactions.length !== 1 ? 's' : ''}`
+      // );
+      // console.log('Imported transactions:', parsedTransactions);
     } catch (error) {
       Alert.alert("Error", "Failed to import transactions. Please try again.");
       console.error('Import error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleImportKCBTransactions = async () => {
+    setIsLoading(true);
+    const allowed = await requestSmsPermission();
+
+    if (!allowed) {
+      setIsLoading(false);
+      return Alert.alert(
+        "Permission Denied",
+        "SMS permission is required to import KCB transactions."
+      );
+    }
+
+    try {
+      console.log('Fetching KCB messages...');
+      const sms = await fetchKCBMessages();
+
+      const parsedTransactions = sms
+        .map(msg => parseKCBMessage(msg.body))
+        .filter(Boolean)
+        .sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime()); // Sort by date, newest first
+
+      setKcbTransactions(parsedTransactions);
+
+      Alert.alert(
+        "Success",
+        `Successfully imported ${parsedTransactions.length} KCB transaction${parsedTransactions.length !== 1 ? 's' : ''}`
+      );
+      console.log('Imported KCB transactions:', parsedTransactions);
+    } catch (error) {
+      Alert.alert("Error", "Failed to import KCB transactions. Please try again.");
+      console.error('KCB import error:', error);
     } finally {
       setIsLoading(false);
     }
@@ -67,11 +108,11 @@ export default function MpesaPage() {
   ];
 
 
-  const totalIncome = transactions.reduce((total, transaction) => {
+  const totalIncome = mpesaTransactions.reduce((total, transaction) => {
     return transaction.type === 'income' ? total + transaction.amount : total;
   }, 0);
 
-  const totalExpenses = transactions.reduce((total, transaction) => {
+  const totalExpenses = mpesaTransactions.reduce((total, transaction) => {
     return transaction.type === 'expense' ? total + transaction.amount : total;
   }, 0);
 
@@ -110,7 +151,7 @@ export default function MpesaPage() {
       {/* Import Action */}
       <View style={styles.section}>
         <TouchableOpacity
-          onPress={handleImport}
+          onPress={handleImportMpesaTransactions}
           style={[styles.importButton, isLoading && styles.importButtonDisabled]}
           disabled={isLoading}
         >
@@ -122,12 +163,14 @@ export default function MpesaPage() {
             ) : (
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 8 }}>
                 <MaterialIcons name="import-export" size={24} color="white" />
-                <Text style={styles.importButtonText}> Import Transactions</Text>
+                  <Text style={styles.importButtonText}> Import Transactions</Text>
               </View>
             )}
           </Text>
         </TouchableOpacity>
       </View>
+
+
 
       {/* Statcard for expenses and income */}
       <View style={styles.section}>
@@ -171,11 +214,11 @@ export default function MpesaPage() {
         <View style={styles.transactionsHeader}>
           <Text style={styles.sectionTitle}>Transactions</Text>
           <View style={styles.badge}>
-            <Text style={styles.badgeText}>{transactions.length}</Text>
+            <Text style={styles.badgeText}>{mpesaTransactions.length}</Text>
           </View>
         </View>
 
-        {transactions.length === 0 ? (
+        {mpesaTransactions.length === 0 ? (
           <View style={styles.emptyState}>
             <Text style={styles.emptyStateIcon}>📊</Text>
             <Text style={styles.emptyStateTitle}>No Transactions Yet</Text>
@@ -185,7 +228,7 @@ export default function MpesaPage() {
           </View>
         ) : (
             <FlatList
-              data={transactions}
+              data={mpesaTransactions}
               scrollEnabled={true}
               keyExtractor={item => item.id?.toString() ?? Math.random().toString()}
               renderItem={({ item }) => (
@@ -202,7 +245,7 @@ export default function MpesaPage() {
                         styles.transactionTypeText,
                         item.type === "income" ? styles.incomeText : styles.expenseText
                       ]}>
-                        {item.type === "income" ? 'Received' : 'Sent'}
+                        {item.title}
                       </Text>
                     </View>
                     <Text style={[
@@ -216,6 +259,17 @@ export default function MpesaPage() {
                     <Text style={styles.transactionParty}>
                       {item.type === "income" ? 'From' : 'To'}: {item.party}
                     </Text>
+                    <View style={styles.transactionMeta}>
+                      {item.transactionCost > 0 && (
+                        <Text style={styles.transactionCost}>
+                          Fee: Ksh {item.transactionCost.toLocaleString()}
+                        </Text>
+                      )}
+                      {/* <Text style={styles.transactionMetaText}>
+                        {formatDate(item.rawDate)} |  {item.rawDate.toLocaleTimeString()}
+                      </Text> */}
+
+                    </View>
                   </View>
                 </View>
               )}
@@ -300,6 +354,7 @@ const styles = StyleSheet.create({
   importButton: {
     backgroundColor: COLORS.primary,
     borderRadius: 8,
+    width: '100%',
     padding: 15,
     alignItems: "center",
     shadowColor: COLORS.primary,
@@ -411,6 +466,21 @@ const styles = StyleSheet.create({
   transactionParty: {
     fontSize: 14,
     color: "#6c757d",
+  },
+  transactionMeta: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 4,
+  },
+  transactionMetaText: {
+    fontSize: 12,
+    color: '#6c757d',
+  },
+  transactionCost: {
+    fontSize: 11,
+    color: '#dc3545',
+    fontStyle: 'italic',
   },
   separator: {
     height: 12,

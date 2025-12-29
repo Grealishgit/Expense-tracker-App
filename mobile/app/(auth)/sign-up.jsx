@@ -15,6 +15,7 @@ export default function SignUpScreen() {
 
     const [emailAddress, setEmailAddress] = useState('')
     const [password, setPassword] = useState('')
+    const [showPassword, setShowPassord] = useState(false)
     const [pendingVerification, setPendingVerification] = useState(false)
     const [code, setCode] = useState('');
     const [error, setError] = useState(null)
@@ -120,43 +121,54 @@ export default function SignUpScreen() {
             <View styles={styles.container} >
                 <Image source={revenue} style={styles.illustration} />
                 <View style={{ borderWidth: 1, borderColor: COLORS.primary, borderRadius: 8, padding: 10 }}>
-                <Text style={styles.title} >Create An Account</Text>
+                    <Text style={styles.title} >Create An Account</Text>
 
 
-                {error ? (
-                    <View style={styles.errorBox}>
-                        <Ionicons name="alert-circle" size={20} color={COLORS.expense} />
-                        <Text style={styles.errorText}>{error}</Text>
-                        <TouchableOpacity onPress={() => setError("")}>
-                            <Ionicons name="close" size={20} color={COLORS.textLight} />
+                    {error ? (
+                        <View style={styles.errorBox}>
+                            <Ionicons name="alert-circle" size={20} color={COLORS.expense} />
+                            <Text style={styles.errorText}>{error}</Text>
+                            <TouchableOpacity onPress={() => setError("")}>
+                                <Ionicons name="close" size={20} color={COLORS.textLight} />
+                            </TouchableOpacity>
+                        </View>
+                    ) : null}
+
+                    <TextInput
+                        autoCapitalize="none"
+                        value={emailAddress}
+                        placeholder="Enter email"
+                        placeholderTextColor="#9a8478"
+                        onChangeText={(email) => setEmailAddress(email)}
+                        style={[styles.input, error && styles.errorInput]}
+                    />
+
+                    <View style={{ position: 'relative' }}>
+                        <TextInput
+                            value={password}
+                            placeholder="Enter password"
+                            placeholderTextColor="#9a8478"
+                            secureTextEntry={showPassword ? true : false}
+                            onChangeText={(password) => setPassword(password)}
+                            style={[styles.input, error && styles.errorInput]}
+                        />
+                        <TouchableOpacity style={{ position: 'absolute', top: 14, right: 8 }} onPress={() => setShowPassord(!showPassword)}>
+                            {showPassword ? (
+                                <Ionicons name='eye-off' size={20} color={COLORS.primary} />
+                            ) : (
+                                <Ionicons name='eye' size={20} color={COLORS.primary} />
+                            )}
                         </TouchableOpacity>
                     </View>
-                ) : null}
 
-                <TextInput
-                    autoCapitalize="none"
-                    value={emailAddress}
-                    placeholder="Enter email"
-                    placeholderTextColor="#9a8478"
-                    onChangeText={(email) => setEmailAddress(email)}
-                    style={[styles.input, error && styles.errorInput]}
-                />
-                <TextInput
-                    value={password}
-                    placeholder="Enter password"
-                    placeholderTextColor="#9a8478"
-                    secureTextEntry={true}
-                    onChangeText={(password) => setPassword(password)}
-                    style={[styles.input, error && styles.errorInput]}
-                />
-                <TouchableOpacity onPress={onSignUpPress} style={styles.button}>
-                    <Text style={styles.buttonText} >Sign Up</Text>
-                </TouchableOpacity>
-                <View style={styles.footerContainer}>
-                    <Text style={styles.footerText} >Already have an account?</Text>
-                    <TouchableOpacity onPress={() => router.back()}>
-                        <Text style={styles.linkText} >Sign in</Text>
+                    <TouchableOpacity onPress={onSignUpPress} style={styles.button}>
+                        <Text style={styles.buttonText} >Sign Up</Text>
                     </TouchableOpacity>
+                    <View style={styles.footerContainer}>
+                        <Text style={styles.footerText} >Already have an account?</Text>
+                        <TouchableOpacity onPress={() => router.back()}>
+                            <Text style={styles.linkText} >Sign in</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>

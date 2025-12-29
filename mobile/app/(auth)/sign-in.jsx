@@ -14,7 +14,8 @@ export default function Page() {
     const router = useRouter()
 
     const [emailAddress, setEmailAddress] = useState('')
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassord] = useState(false);
     const [error, setError] = useState("")
 
     // Handle the submission of the sign-in form
@@ -80,14 +81,27 @@ export default function Page() {
                         onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
                         style={[styles.input, error && styles.errorInput]}
                     />
-                    <TextInput
-                        value={password}
-                        placeholder="Enter password"
-                        placeholderTextColor="#9a8478"
-                        secureTextEntry={true}
-                        onChangeText={(password) => setPassword(password)}
-                        style={[styles.input, error && styles.errorInput]}
-                    />
+                    <View style={{ position: 'relative' }}>
+                        <TextInput
+                            value={password}
+                            placeholder="Enter password"
+                            placeholderTextColor="#9a8478"
+                            secureTextEntry={showPassword ? true : false}
+                            onChangeText={(password) => setPassword(password)}
+                            style={[styles.input, error && styles.errorInput]}
+                        />
+                        <TouchableOpacity style={{ position: 'absolute', top: 14, right: 8 }} onPress={() => setShowPassord(!showPassword)}>
+                            {showPassword ? (
+                                <Ionicons name='eye-off' size={20} color={COLORS.primary} />
+                            ) : (
+                                <Ionicons name='eye' size={20} color={COLORS.primary} />
+                            )}
+                        </TouchableOpacity>
+
+
+                    </View>
+
+
                     <TouchableOpacity onPress={onSignInPress} style={styles.button}>
                         <Text style={styles.buttonText} >Sign In</Text>
                     </TouchableOpacity>
