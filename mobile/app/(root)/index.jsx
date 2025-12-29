@@ -71,7 +71,10 @@ export default function Page() {
                             <Ionicons name="add" size={20} color="white" />
                             <Text style={styles.addButtonText}>Add</Text>
                         </TouchableOpacity>
-                        <SignOutButton />
+                        {/* <SignOutButton /> */}
+                        <TouchableOpacity style={styles.profileButton} onPress={() => router.push('/profile')}>
+                            <Ionicons name="person-circle-outline" size={25} color="white" />
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <BalanceCard summary={summary} />

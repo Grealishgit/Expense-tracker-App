@@ -72,6 +72,16 @@ export const styles = StyleSheet.create({
         fontWeight: "bold",
         marginLeft: 4,
     },
+    profileButton: {
+        padding: 10,
+        backgroundColor: COLORS.primary,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        elevation: 1,
+        borderRadius: 25,
+    },
     logoutButton: {
         padding: 8,
         borderRadius: 8,
