@@ -47,7 +47,7 @@ const MpesaTransactions = () => {
             //   "Success",
             //   `Successfully imported ${parsedTransactions.length} transaction${parsedTransactions.length !== 1 ? 's' : ''}`
             // );
-            // console.log('Imported transactions:', parsedTransactions);
+            // console.log('Imported Mpesa transactions:', parsedTransactions);
         } catch (error) {
             Alert.alert("Error", "Failed to import transactions. Please try again.");
             console.error('Import error:', error);
