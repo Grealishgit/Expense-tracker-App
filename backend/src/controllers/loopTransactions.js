@@ -11,6 +11,12 @@ export const createLoopTransaction = async (req, res) => {
             });
         }
 
+        if (mpesa_reference.length < 10) {
+            return res.status(400).json({
+                error: 'Invalid mpesa_reference number for the transaction'
+            });
+        }
+
         // Parse and transform data
         const rawDate = req.body.rawDate || new Date().toISOString();
         const dateObj = new Date(rawDate);
@@ -97,6 +103,25 @@ export const bulkCreateLoopTransactions = async (req, res) => {
                 error: 'user_id and transactions array are required'
             });
         }
+
+        for (const tx of transactions) {
+            if (!tx.id || tx.amount === undefined || !tx.mpesaRef) {
+                return res.status(400).json({
+                    error: 'Each transaction must have id, amount, and mpesaRef'
+                });
+            }
+        }
+
+        for (const tx of transactions) {
+            if (tx.mpesaRef.length < 10) {
+                return res.status(400).json({
+                    error: 'Invalid mpesa_reference number for one or more transactions'
+                });
+            }
+        }
+
+
+        // Validate each transaction    
 
         const createdTransactions = [];
         const errors = [];

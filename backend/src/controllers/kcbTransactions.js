@@ -12,6 +12,12 @@ export const createKcbTransaction = async (req, res) => {
             });
         }
 
+        if (reference.length < 10) {
+            return res.status(400).json({
+                error: 'Invalid refernce number for this transaction'
+            });
+        }
+
         // Extract optional fields with defaults
         const {
             display_date = new Date().toLocaleDateString('en-GB'), // "28/12/2025"
@@ -89,6 +95,11 @@ export const bulkCreateKcbTransactions = async (req, res) => {
                 if (!tx.title || tx.amount === undefined || !tx.reference) {
                     throw new Error('Missing required fields: title, amount, or reference');
                 }
+
+                if (tx.reference.length < 10) {
+                    throw new Error('Invalid reference number for one or more transactions');
+                }
+
 
                 const rawDate = tx.rawDate || new Date().toISOString();
                 const dateObj = new Date(rawDate);

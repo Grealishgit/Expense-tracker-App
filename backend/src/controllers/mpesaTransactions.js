@@ -12,6 +12,12 @@ export const createMpesaTransaction = async (req, res) => {
             });
         }
 
+        if (transaction_id.length < 10) {
+            return res.status(400).json({
+                error: 'Invalid transaction_id for this transaction'
+            });
+        }
+
         // Parse and transform data
         const rawDate = req.body.rawDate || req.body.raw_timestamp || new Date().toISOString();
         const dateObj = new Date(rawDate);
@@ -89,6 +95,14 @@ export const bulkCreateMpesaTransactions = async (req, res) => {
             return res.status(400).json({
                 error: 'user_id and non-empty transactions array are required'
             });
+        }
+
+        for (const tx of transactions) {
+            if (tx.id && tx.id.length < 10) {
+                return res.status(400).json({
+                    error: `Invalid transaction id for one or more transactions: ${tx.id}`
+                });
+            }
         }
 
         // Validate each transaction
