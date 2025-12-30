@@ -1,4 +1,5 @@
-import { sql } from "../config/db.js";
+import { sql } from '../config/db.js'
+
 
 export const createKcbTransaction = async (req, res) => {
     try {
@@ -13,20 +14,37 @@ export const createKcbTransaction = async (req, res) => {
 
         // Extract optional fields with defaults
         const {
-            date = new Date().toLocaleDateString('en-GB'), // Default to today
+            display_date = new Date().toLocaleDateString('en-GB'), // "28/12/2025"
             party = '',
-            rawDate = new Date().toISOString(),
-            time = new Date().toLocaleTimeString('en-US', { hour12: true }),
+            transaction_date = new Date().toISOString().split('T')[0], // "2025-12-28"
+            display_time = new Date().toLocaleTimeString('en-US', { hour12: true }), // "07:10 PM"
+            transaction_time = new Date().toISOString().split('T')[1].split('.')[0], // "16:10:00"
             type = 'expense'
         } = req.body;
 
         const transaction = await sql`
             INSERT INTO kcb_transactions (
-                user_id, title, amount, date, party, 
-                raw_date, reference, time, type
+                user_id, 
+                title, 
+                amount, 
+                transaction_date,    -- ✅ Changed from 'date'
+                display_date,        -- ✅ Changed from 'date'
+                party, 
+                reference, 
+                transaction_time,    -- ✅ Changed from 'time'
+                display_time,        -- ✅ Changed from 'time'
+                type
             ) VALUES (
-                ${user_id}, ${title}, ${amount}, ${date}, ${party},
-                ${rawDate}, ${reference}, ${time}, ${type}
+                ${user_id}, 
+                ${title}, 
+                ${amount}, 
+                ${transaction_date}, 
+                ${display_date},
+                ${party},
+                ${reference},
+                ${transaction_time},
+                ${display_time},
+                ${type}
             )
             RETURNING *
         `;
