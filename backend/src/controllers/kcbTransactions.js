@@ -27,12 +27,12 @@ export const createKcbTransaction = async (req, res) => {
                 user_id, 
                 title, 
                 amount, 
-                transaction_date,    -- ✅ Changed from 'date'
-                display_date,        -- ✅ Changed from 'date'
+                transaction_date,    --  Changed from 'date'
+                display_date,        --  Changed from 'date'
                 party, 
                 reference, 
-                transaction_time,    -- ✅ Changed from 'time'
-                display_time,        -- ✅ Changed from 'time'
+                transaction_time,    --  Changed from 'time'
+                display_time,        --  Changed from 'time'
                 type
             ) VALUES (
                 ${user_id}, 

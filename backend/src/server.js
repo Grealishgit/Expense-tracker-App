@@ -5,6 +5,7 @@ import rateLimiter from './middleware/rateLimiter.js';
 import transactionsRoute from './routes/transactionsRoute.js';
 import job from './config/cron.js';
 import kcbRouter from './routes/kcbRoute.js';
+import loopRouter from './routes/loopRoute.js';
 
 dotenv.config();
 
@@ -29,6 +30,8 @@ app.get('/', (req, res) => {
 app.use("/api/transactions", transactionsRoute);
 
 app.use("/api/kcb", kcbRouter);
+
+app.use('/api/loop', loopRouter)
 
 connectToDatabase().then(() => {
     app.listen(PORT, () => {

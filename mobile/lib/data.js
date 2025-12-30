@@ -1,5 +1,5 @@
 // Transactio formats for DB
-export const kcbTransactions=[
+export const kcbTransactions = [
     {
         "amount": 40,
         "date": "28/12/2025",
@@ -47,7 +47,7 @@ export const kcbTransactions=[
 
 
 
-const loopTransaction=[
+const loopTransaction = [
     {
         "amount": 30,
         "date": "12/11/2025",
@@ -97,7 +97,7 @@ export const mpesaTransactions=[
         "id": "TI956N8TVX",
         "newBalance": 26.38,
         "party": "FAADI INVESTMENTS",
-        "rawDate": 2025-12-30T15: 27: 06.940Z,
+        "rawDate": "2025-12-30T15:27:06.940Z",
         "time": "",
         "title": "Outgoing Payment",
         "transactionCost": 0,
@@ -109,7 +109,7 @@ export const mpesaTransactions=[
         "id": "TI986M5S0M",
         "newBalance": 21.38,
         "party": "everlyne  kiima",
-        "rawDate": 2025-12-30T15: 27: 06.940Z,
+        "rawDate": "2025-12-30T15:27:06.940Z",
         "time": "",
         "title": "Outgoing Payment",
         "transactionCost": 0,
@@ -121,7 +121,7 @@ export const mpesaTransactions=[
         "id": "TI974DPFM3",
         "newBalance": 81.38,
         "party": "Cornelius Kisoo",
-        "rawDate": 2025-12-30T15: 27: 06.940Z,
+        "rawDate": "2025-12-30T15:27:06.940Z",
         "time": "",
         "title": "Outgoing Payment",
         "transactionCost": 0,
@@ -133,7 +133,7 @@ export const mpesaTransactions=[
         "id": "TI88252JJ6",
         "newBalance": 600,
         "party": "ERICK  SHIKANGA",
-        "rawDate": 2025-12-30T15: 27: 06.940Z,
+        "rawDate": "2025-12-30T15:27:06.940Z",
         "time": "",
         "title": "Incoming Payment",
         "transactionCost": 0,
@@ -145,12 +145,11 @@ export const mpesaTransactions=[
         "id": "TIB2FF2PTG",
         "newBalance": 500,
         "party": "Kelvin  Muimi",
-        "rawDate": 2025-12-30T15: 27: 06.939Z,
+        "rawDate": "2025-12-30T15:27:06.939Z",
         "time": "",
         "title": "Incoming Payment",
         "transactionCost": 0,
         "type": "income"
     },
-    
-    
+
 ]
